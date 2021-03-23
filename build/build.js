@@ -7,7 +7,8 @@ var params = {
     rectMargin: 4,
     shift: 1.5,
     random_and_noise_Seed: 1,
-    randomMode_1classic_2gaussian_3noise: 1,
+    randomMode_1classic_2gaussian_3noise: 3,
+    noise_scale: 0.01,
     darkMode: false,
     rectModeCENTER: true,
     Download_Image: function () { return save(); },
@@ -20,21 +21,25 @@ gui.add(params, "maxLength", 1, 20, 1);
 gui.add(params, "rectMargin", 1, 10, 1);
 gui.add(params, "shift", 0.5, 10, 0.5);
 gui.add(params, "random_and_noise_Seed", 1, 100, 1);
+gui.add(params, "noise_scale", 0, 0.1, 0.0001);
 gui.add(params, "rectModeCENTER");
 gui.add(params, "darkMode");
 gui.add(params, "Download_Image");
-function offset(incertitude, coordinate) {
+function offset(incertitude, x, y) {
     switch (params.randomMode_1classic_2gaussian_3noise) {
         case 1:
             return random(-incertitude, incertitude);
         case 2:
             return randomGaussian(0, incertitude);
         case 3:
-            if (random() < 0.5) {
-                return -incertitude * noise(coordinate);
-            }
-            return incertitude * noise(coordinate);
+            return map(noise(x * params.noise_scale, y * params.noise_scale), 0, 1, -incertitude, incertitude);
     }
+}
+function getX(x, y, incertitude) {
+    return x + offset(incertitude, x, y);
+}
+function getY(x, y, incertitude) {
+    return y + offset(incertitude, x, y);
 }
 function draw() {
     if (params.darkMode) {
@@ -91,19 +96,19 @@ function draw() {
                 if ((-y + height / 4) / params.radius > sq((x - 3 * width / 4) / params.radius)) {
                     valeurAlea = random(params.minLength, 2 / 3 * (params.maxLength));
                     if (random() < 0.5 && x < 3 * width / 4 + params.radius - 1 / 6 * params.radius && x > 3 * width / 4 - params.radius + 1 / 6 * params.radius) {
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), valeurAlea, params.rectThickness);
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), valeurAlea, params.rectThickness);
                     }
                     else {
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), params.rectThickness, valeurAlea);
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), params.rectThickness, valeurAlea);
                     }
                 }
                 else {
                     valeurAlea = random(params.minLength, params.maxLength);
                     if (random() < 0.5 && x < 3 * width / 4 + params.radius - 1 / 6 * params.radius && x > 3 * width / 4 - params.radius + 1 / 6 * params.radius) {
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), valeurAlea, params.rectThickness);
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), valeurAlea, params.rectThickness);
                     }
                     else {
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), params.rectThickness, valeurAlea);
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), params.rectThickness, valeurAlea);
                     }
                 }
             }
@@ -119,19 +124,19 @@ function draw() {
                 if ((-y + 3 * height / 4) / params.radius > sq((x - width / 4) / params.radius)) {
                     valeurAlea = random(params.minLength, 2 / 3 * (params.maxLength));
                     if (random() < 0.5 && x < width / 4 + params.radius - 1 / 6 * params.radius && x > width / 4 - params.radius + 1 / 6 * params.radius) {
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), valeurAlea, params.rectThickness);
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), valeurAlea, params.rectThickness);
                     }
                     else {
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), params.rectThickness, valeurAlea);
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), params.rectThickness, valeurAlea);
                     }
                 }
                 else {
                     valeurAlea = random(params.minLength, params.maxLength);
                     if (random() < 0.5 && x < width / 4 + params.radius - 1 / 6 * params.radius && x > width / 4 - params.radius + 1 / 6 * params.radius) {
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), valeurAlea, params.rectThickness);
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), valeurAlea, params.rectThickness);
                     }
                     else {
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), params.rectThickness, valeurAlea);
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), params.rectThickness, valeurAlea);
                     }
                 }
             }
@@ -147,19 +152,19 @@ function draw() {
                 if ((-y + 3 * height / 4) / params.radius > sq((x - 3 * width / 4) / params.radius)) {
                     valeurAlea = random(params.minLength, 2 / 3 * (params.maxLength));
                     if (random() < 0.5 && x < 3 * width / 4 + params.radius - 1 / 6 * params.radius && x > 3 * width / 4 - params.radius + 1 / 6 * params.radius) {
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), valeurAlea, params.rectThickness);
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), valeurAlea, params.rectThickness);
                     }
                     else {
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), params.rectThickness, valeurAlea);
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), params.rectThickness, valeurAlea);
                     }
                 }
                 else {
                     valeurAlea = random(params.minLength, params.maxLength);
                     if (random() < 0.5 && x < 3 * width / 4 + params.radius - 1 / 6 * params.radius && x > 3 * width / 4 - params.radius + 1 / 6 * params.radius) {
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), valeurAlea, params.rectThickness);
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), valeurAlea, params.rectThickness);
                     }
                     else {
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), params.rectThickness, valeurAlea);
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), params.rectThickness, valeurAlea);
                     }
                 }
             }

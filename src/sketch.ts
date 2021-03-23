@@ -11,7 +11,8 @@ const params = {
     rectMargin: 4,
     shift: 1.5,
     random_and_noise_Seed: 1,
-    randomMode_1classic_2gaussian_3noise: 1,
+    randomMode_1classic_2gaussian_3noise: 3,
+    noise_scale: 0.01,
     darkMode: false,
     rectModeCENTER: true,
 
@@ -26,6 +27,7 @@ gui.add(params, "maxLength", 1, 20, 1)
 gui.add(params, "rectMargin", 1, 10, 1)
 gui.add(params, "shift", 0.5, 10, 0.5)
 gui.add(params, "random_and_noise_Seed", 1, 100, 1)
+gui.add(params, "noise_scale", 0, 0.1, 0.0001)
 gui.add(params, "rectModeCENTER")
 gui.add(params, "darkMode")
 gui.add(params, "Download_Image")
@@ -35,25 +37,23 @@ gui.add(params, "Download_Image")
 // -------------------
 
 
-function offset(incertitude, coordinate){
+function offset(incertitude, x, y){
     switch (params.randomMode_1classic_2gaussian_3noise){
         case 1:
             return random(-incertitude, incertitude)
         case 2:
             return randomGaussian(0, incertitude)
         case 3:
-            if(random() < 0.5){
-                return -incertitude * noise(coordinate)
-            }
-            return incertitude * noise(coordinate)
+            return map(noise(x*params.noise_scale, y*params.noise_scale), 0, 1, -incertitude, incertitude)
+    }
 }
 
 function getX(x, y, incertitude) {
-    return x + offset(incertitude, x)
+    return x + offset(incertitude, x, y)
 }
 
 function getY(x, y, incertitude) {
-    return y + offset(incertitude, y)
+    return y + offset(incertitude, x, y)
 }
 
 function draw() {
