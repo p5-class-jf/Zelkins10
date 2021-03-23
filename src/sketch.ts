@@ -46,7 +46,14 @@ function offset(incertitude, coordinate){
                 return -incertitude * noise(coordinate)
             }
             return incertitude * noise(coordinate)
-    }
+}
+
+function getX(x, y, incertitude) {
+    return x + offset(incertitude, x)
+}
+
+function getY(x, y, incertitude) {
+    return y + offset(incertitude, y)
 }
 
 function draw() {
@@ -129,10 +136,10 @@ function draw() {
                     valeurAlea = random(params.minLength, 2/3*(params.maxLength));
 
                     if(random() < 0.5 && x < 3*width/4 + params.radius - 1/6*params.radius && x > 3*width/4 - params.radius + 1/6*params.radius){ // 1 chance sur 2, sauf pour les côtés
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), valeurAlea, params.rectThickness) // largeur et position aléatoires
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), valeurAlea, params.rectThickness) // largeur et position aléatoires
                     }
                     else{
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), params.rectThickness, valeurAlea) // hauteur et position aléatoires
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), params.rectThickness, valeurAlea) // hauteur et position aléatoires
                     }
                 }
 
@@ -140,10 +147,10 @@ function draw() {
                     valeurAlea = random(params.minLength, params.maxLength);
 
                     if(random() < 0.5 && x < 3*width/4 + params.radius - 1/6*params.radius && x > 3*width/4 - params.radius + 1/6*params.radius){ // 1 chance sur 2, sauf pour les côtés
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), valeurAlea, params.rectThickness) // largeur et position aléatoires
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), valeurAlea, params.rectThickness) // largeur et position aléatoires
                     }
                     else{
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), params.rectThickness, valeurAlea) // hauteur et position aléatoires
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), params.rectThickness, valeurAlea) // hauteur et position aléatoires
                     }
                 }
             }
@@ -168,10 +175,10 @@ function draw() {
                     valeurAlea = random(params.minLength, 2/3*(params.maxLength));
 
                     if(random() < 0.5 && x < width/4 + params.radius - 1/6*params.radius && x > width/4 - params.radius + 1/6*params.radius){ // 1 chance sur 2, sauf pour les côtés
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), valeurAlea, params.rectThickness) // largeur et position aléatoires
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), valeurAlea, params.rectThickness) // largeur et position aléatoires
                     }
                     else{
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), params.rectThickness, valeurAlea) // hauteur et position aléatoires
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), params.rectThickness, valeurAlea) // hauteur et position aléatoires
                     }
                 }
 
@@ -179,10 +186,10 @@ function draw() {
                     valeurAlea = random(params.minLength, params.maxLength);
 
                     if(random() < 0.5 && x < width/4 + params.radius - 1/6*params.radius && x > width/4 - params.radius + 1/6*params.radius){ // 1 chance sur 2, sauf pour les côtés
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), valeurAlea, params.rectThickness) // largeur et position aléatoires
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), valeurAlea, params.rectThickness) // largeur et position aléatoires
                     }
                     else{
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), params.rectThickness, valeurAlea) // hauteur et position aléatoires
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), params.rectThickness, valeurAlea) // hauteur et position aléatoires
                     }
                 }
             }
@@ -207,10 +214,10 @@ function draw() {
                     valeurAlea = random(params.minLength, 2/3*(params.maxLength));
 
                     if(random() < 0.5 && x < 3*width/4 + params.radius - 1/6*params.radius && x > 3*width/4 - params.radius + 1/6*params.radius){ // 1 chance sur 2, sauf pour les côtés
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), valeurAlea, params.rectThickness) // largeur et position aléatoires
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), valeurAlea, params.rectThickness) // largeur et position aléatoires
                     }
                     else{
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), params.rectThickness, valeurAlea) // hauteur et position aléatoires
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), params.rectThickness, valeurAlea) // hauteur et position aléatoires
                     }
                 }
 
@@ -218,10 +225,10 @@ function draw() {
                     valeurAlea = random(params.minLength, params.maxLength);
 
                     if(random() < 0.5 && x < 3*width/4 + params.radius - 1/6*params.radius && x > 3*width/4 - params.radius + 1/6*params.radius){ // 1 chance sur 2, sauf pour les côtés
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), valeurAlea, params.rectThickness) // largeur et position aléatoires
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), valeurAlea, params.rectThickness) // largeur et position aléatoires
                     }
                     else{
-                        rect(x + offset(incertitude, x), y + offset(incertitude, y), params.rectThickness, valeurAlea) // hauteur et position aléatoires
+                        rect(getX(x, y, incertitude), getY(x, y, incertitude), params.rectThickness, valeurAlea) // hauteur et position aléatoires
                     }
                 }
             }
